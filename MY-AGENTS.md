@@ -31,7 +31,7 @@ Use this workflow unless the user requests a different history strategy:
 8. Run `npm run check` with full output plus the documented build and interactive
    smoke tests. Do not advance `mathieu` while any compatibility check fails.
 9. Fast-forward `mathieu` to the tested update branch, push normally, and create
-   a permanent tag such as `0.80.6-mathieu.2`. Never force-push `mathieu`.
+   a permanent tag such as `0.80.6-mathieu.3`. Never force-push `mathieu`.
 10. Report the upstream release, meaningful changes, extension audit result,
    validation result, resulting fork commits, and release tag.
 
@@ -48,9 +48,9 @@ its origin and whether newer upstream generation supersedes it before deciding.
 
 - Read `docs/agent-setup.md` before adding, removing, or updating an extension.
   It is the detailed setup record and extension ledger.
-- This release has no curated third-party extensions. Adding one requires a
-  deliberate fork change, exact dependency pins, audit documentation, and a new
-  tested release tag.
+- The curated baseline includes `@hypabolic/pi-hypa@0.1.10`. Changing it or
+  adding another extension requires exact dependency pins, audit documentation,
+  and a new tested release tag.
 - Pin every direct dependency and Pi package to an exact version. Do not use
   ranges such as `^`, `~`, tags, or unversioned package references.
 - Treat an extension update as a new security review. Do not assume approval of

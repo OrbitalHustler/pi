@@ -15,6 +15,16 @@ const internalPackagePrefix = "@earendil-works/pi-";
 const installPackageName = "@earendil-works/pi-coding-agent-install";
 const allowedInstallScriptPackages = new Map([
 	["@google/genai@1.52.0", "preinstall is a no-op in the published package"],
+	["@hypabolic/hypa-darwin-arm64@0.1.10", "postinstall only makes the bundled Hypa binary executable"],
+	["@hypabolic/hypa-darwin-x64@0.1.10", "postinstall only makes the bundled Hypa binary executable"],
+	["@hypabolic/hypa-linux-arm64@0.1.10", "postinstall only makes the bundled Hypa binary executable"],
+	["@hypabolic/hypa-linux-x64@0.1.10", "postinstall only makes the bundled Hypa binary executable"],
+	["@hypabolic/hypa-win32-arm64@0.1.10", "postinstall exits without changing files on Windows"],
+	["@hypabolic/hypa-win32-x64@0.1.10", "postinstall exits without changing files on Windows"],
+	[
+		"@hypabolic/pi-hypa@0.1.10",
+		"postinstall creates a user-local Hypa CLI shim and does not download or execute external code",
+	],
 	["protobufjs@7.6.4", "postinstall only warns about protobufjs version scheme mismatches"],
 ]);
 

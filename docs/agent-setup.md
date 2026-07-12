@@ -33,8 +33,8 @@ npm run check
 # Run the build and interactive smoke tests below.
 git switch mathieu
 git merge --ff-only mathieu-update-0.80.6
-git tag 0.80.6-mathieu.2
-git push origin mathieu 0.80.6-mathieu.2
+git tag 0.80.6-mathieu.3
+git push origin mathieu 0.80.6-mathieu.3
 ```
 
 Before synchronizing, inspect the worktree and the commits unique to `mathieu`.
@@ -73,7 +73,8 @@ sudo pacman -S --needed git mise
 mise install
 ```
 
-No additional host packages are required for `0.80.6-mathieu.2`. If a future
+No additional host packages are required. Hypa ships a platform-specific native
+binary through its pinned npm dependency. If a future
 release adds OS-level enforcement, document its CachyOS packages and a concrete
 verification command here. Add separate subsections for other operating systems
 rather than assuming the CachyOS result transfers.
@@ -132,9 +133,10 @@ pi --version
 ```
 
 The resolved command must point into
-`~/workspace/pi-agent/packages/coding-agent/dist/cli.js`. This release contains
-no curated third-party extensions. Credentials, sessions, trust decisions, and
-optional user configuration remain under `~/.pi/agent`.
+`~/workspace/pi-agent/packages/coding-agent/dist/cli.js`. The curated Hypa
+extension loads automatically in every working directory. Credentials,
+sessions, trust decisions, and optional user configuration remain under
+`~/.pi/agent`.
 
 After pulling or merging new fork code, rerun:
 
@@ -162,9 +164,9 @@ the other.
 | Global user | `~/.pi/agent/` | every Pi installation using that agent directory | Credentials, sessions, and optional personal overrides |
 | Project | `.pi/` | only that repository | Repo-specific or team-shared resources |
 
-No third-party extension is built into `0.80.6-mathieu.2`. Any future curated
-set must be designed, audited, pinned, and tested as part of a later tagged fork
-release. Project and global resources still work normally.
+Hypa is built into the fork and loads independently of user or project settings.
+Run `pi -ne` to disable it and all discovered extensions for recovery. Project
+and global resources still work normally.
 
 ## Installed extensions
 
@@ -174,7 +176,7 @@ extensions placed in `~/.pi/agent/extensions/` (global) or `.pi/extensions/`
 
 | Extension | Source | Version | Why we added it |
 |-----------|--------|---------|-----------------|
-| _none_ | — | — | `0.80.6-mathieu.2` intentionally ships without third-party extensions. |
+| Hypa | [`@hypabolic/pi-hypa`](https://github.com/Hypabolic/Hypa/tree/v0.1.10/packages/pi-hypa) | `0.1.10` | Compresses noisy local tool output before it reaches the model context. |
 
 Landstrip was removed after audit; see the evaluation and decision log below.
 
@@ -298,4 +300,5 @@ A running record of why the setup looks the way it does.
 | 2026-07-11 | Moved `pi-landstrip` from project settings into the fork-curated extension registry. | Every build of `mathieu` now carries the reviewed extension set in every working directory while normal user state remains outside Git. |
 | 2026-07-11 | Audited and pinned `pi-landstrip@0.16.29` with `@landstrip/landstrip@0.16.23`. | Published extension source matches GitHub tag 0.16.29; no malware indicators or lifecycle scripts found. Linux x64 binary SHA-256: `6bf62e09e14537f56218ce97a8b865ed74212e9645b972f66f0967b42ffa18f2`. Accepted caveat: approvals can widen to a displayed directory scope. |
 | 2026-07-11 | Removed Landstrip from `0.80.6-mathieu.1`. | Its stale Pi `^0.74.2` peer range installs a duplicate old Pi package with known advisories. A security control with unresolved packaging and fail-open concerns is not suitable for the curated baseline. |
+| 2026-07-11 | Audited and added `@hypabolic/pi-hypa@0.1.10`. | The extension has an unrestricted Pi peer, zero reported npm advisories, no network telemetry in its TypeScript wrapper, and a local native CLI. Its release workflow stamps package and CLI versions after checkout, so the npm artifact is not byte-identical to tag `v0.1.10`; the generated delta was reviewed. Linux x64 binary SHA-256: `d4517903f584bd27efce6b18dd556d12a6481172541b389cf8b79e74f765a899`. Hypa also installs a private TUI `0.79.10` because of its narrow `^0.79.8` dependency; compatibility is covered by the fork smoke test. |
 | 2026-06-28 | Deferred OneCLI credential isolation. | Worth it only for unattended loops, and it conflicts with landstrip over the proxy env var. Revisit when running pi unattended; chosen design would be OneCLI-owns-network plus landstrip-owns-filesystem. |

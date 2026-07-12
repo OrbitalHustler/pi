@@ -12,6 +12,7 @@
 				"@earendil-works/pi-agent-core": "^0.80.6",
 				"@earendil-works/pi-ai": "^0.80.6",
 				"@earendil-works/pi-tui": "^0.80.6",
+				"@hypabolic/pi-hypa": "0.1.10",
 				"@silvia-odwyer/photon-node": "0.3.4",
 				"chalk": "5.6.2",
 				"cross-spawn": "7.0.6",
@@ -547,6 +548,142 @@
 			},
 			"hasInstallScript": true
 		},
+		"node_modules/@hypabolic/hypa": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/hypa/-/hypa-0.1.10.tgz",
+			"integrity": "sha512-nNWX8FNRfVH6A22OEQu2HSUZS4yB5/hCozBcmPlbFLB423/SMdZqzvnTs/+64L0mmVQU8cNMh7NVhtBXcoci/Q==",
+			"license": "FSL-1.1-ALv2",
+			"optionalDependencies": {
+				"@hypabolic/hypa-darwin-arm64": "0.1.10",
+				"@hypabolic/hypa-darwin-x64": "0.1.10",
+				"@hypabolic/hypa-linux-arm64": "0.1.10",
+				"@hypabolic/hypa-linux-x64": "0.1.10",
+				"@hypabolic/hypa-win32-arm64": "0.1.10",
+				"@hypabolic/hypa-win32-x64": "0.1.10"
+			},
+			"bin": {
+				"hypa": "bin.js"
+			},
+			"engines": {
+				"node": ">=18"
+			}
+		},
+		"node_modules/@hypabolic/hypa-darwin-arm64": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/hypa-darwin-arm64/-/hypa-darwin-arm64-0.1.10.tgz",
+			"integrity": "sha512-nRncjHhC994NHI45dsQbK9II1bec6gikQrRyo+z0uZw2xCeUer4tXDoUM8YqOBM8UHnhW6f5vw3SJ5ZYiTP0cg==",
+			"license": "FSL-1.1-ALv2",
+			"engines": {
+				"node": ">=18"
+			},
+			"os": [
+				"darwin"
+			],
+			"cpu": [
+				"arm64"
+			],
+			"optional": true,
+			"hasInstallScript": true
+		},
+		"node_modules/@hypabolic/hypa-darwin-x64": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/hypa-darwin-x64/-/hypa-darwin-x64-0.1.10.tgz",
+			"integrity": "sha512-oXX0Lfbr3LBWC3P/FAb/4OMW6TAqKSlMSnHYAPe8baX3m8TONcqpylCpsK2ez631R2lJUtx1lvDhXdvpCo/AVg==",
+			"license": "FSL-1.1-ALv2",
+			"engines": {
+				"node": ">=18"
+			},
+			"os": [
+				"darwin"
+			],
+			"cpu": [
+				"x64"
+			],
+			"optional": true,
+			"hasInstallScript": true
+		},
+		"node_modules/@hypabolic/hypa-linux-arm64": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/hypa-linux-arm64/-/hypa-linux-arm64-0.1.10.tgz",
+			"integrity": "sha512-ikdObtyHrrINlVTqpgiApJ4niAGkv6xpzlabibEPEILRhDKckYcDgdjSnXKid3GRUfxBj/HIy5tvtKirdG4u4w==",
+			"license": "FSL-1.1-ALv2",
+			"engines": {
+				"node": ">=18"
+			},
+			"os": [
+				"linux"
+			],
+			"cpu": [
+				"arm64"
+			],
+			"optional": true,
+			"hasInstallScript": true
+		},
+		"node_modules/@hypabolic/hypa-linux-x64": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/hypa-linux-x64/-/hypa-linux-x64-0.1.10.tgz",
+			"integrity": "sha512-Sh001FwckQF+y1PZqrfzLKUoOutfJ8RCa8Av5RzmZdbvC5Mcy2Dg18F3H0RnlzZXOoja/USH6odZnTYrONcQjA==",
+			"license": "FSL-1.1-ALv2",
+			"engines": {
+				"node": ">=18"
+			},
+			"os": [
+				"linux"
+			],
+			"cpu": [
+				"x64"
+			],
+			"optional": true,
+			"hasInstallScript": true
+		},
+		"node_modules/@hypabolic/hypa-win32-arm64": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/hypa-win32-arm64/-/hypa-win32-arm64-0.1.10.tgz",
+			"integrity": "sha512-br2ciBYAExVc5uCod7V9C00acMaIWR0k+CsLC9z9T+2ccdzsYba2e7kLXFNVTKOOrzRCiSarTs+/p+t3EYFtcg==",
+			"license": "FSL-1.1-ALv2",
+			"engines": {
+				"node": ">=18"
+			},
+			"os": [
+				"win32"
+			],
+			"cpu": [
+				"arm64"
+			],
+			"optional": true,
+			"hasInstallScript": true
+		},
+		"node_modules/@hypabolic/hypa-win32-x64": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/hypa-win32-x64/-/hypa-win32-x64-0.1.10.tgz",
+			"integrity": "sha512-Qtkn68pnFk8bKWx+vXDAS9/aPue/PqTGi2Kv3kC5iSvVjmPmLuPMcP8Q8ave1B8h5KJQtuq8VwFRJTa7hU36Eg==",
+			"license": "FSL-1.1-ALv2",
+			"engines": {
+				"node": ">=18"
+			},
+			"os": [
+				"win32"
+			],
+			"cpu": [
+				"x64"
+			],
+			"optional": true,
+			"hasInstallScript": true
+		},
+		"node_modules/@hypabolic/pi-hypa": {
+			"version": "0.1.10",
+			"resolved": "https://registry.npmjs.org/@hypabolic/pi-hypa/-/pi-hypa-0.1.10.tgz",
+			"integrity": "sha512-LC2LNJf1ON1xihhwM8b3q0NeBBUJDzglnANbsvWZO7drlQl/tTIsYn3jZ5Uk/QoHEcXUhipXwGCOSIHGVvyD4g==",
+			"license": "FSL-1.1-ALv2",
+			"dependencies": {
+				"@earendil-works/pi-tui": "^0.79.8",
+				"@hypabolic/hypa": "0.1.10"
+			},
+			"peerDependencies": {
+				"@earendil-works/pi-coding-agent": "*"
+			},
+			"hasInstallScript": true
+		},
 		"node_modules/@mariozechner/clipboard": {
 			"version": "0.3.9",
 			"resolved": "https://registry.npmjs.org/@mariozechner/clipboard/-/clipboard-0.3.9.tgz",
@@ -628,9 +765,6 @@
 			"cpu": [
 				"arm64"
 			],
-			"libc": [
-				"glibc"
-			],
 			"optional": true
 		},
 		"node_modules/@mariozechner/clipboard-linux-arm64-musl": {
@@ -646,9 +780,6 @@
 			],
 			"cpu": [
 				"arm64"
-			],
-			"libc": [
-				"musl"
 			],
 			"optional": true
 		},
@@ -666,9 +797,6 @@
 			"cpu": [
 				"riscv64"
 			],
-			"libc": [
-				"glibc"
-			],
 			"optional": true
 		},
 		"node_modules/@mariozechner/clipboard-linux-x64-gnu": {
@@ -685,9 +813,6 @@
 			"cpu": [
 				"x64"
 			],
-			"libc": [
-				"glibc"
-			],
 			"optional": true
 		},
 		"node_modules/@mariozechner/clipboard-linux-x64-musl": {
@@ -703,9 +828,6 @@
 			],
 			"cpu": [
 				"x64"
-			],
-			"libc": [
-				"musl"
 			],
 			"optional": true
 		},
