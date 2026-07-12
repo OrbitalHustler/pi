@@ -31,7 +31,7 @@ Use this workflow unless the user requests a different history strategy:
 8. Run `npm run check` with full output plus the documented build and interactive
    smoke tests. Do not advance `mathieu` while any compatibility check fails.
 9. Fast-forward `mathieu` to the tested update branch, push normally, and create
-   a permanent tag such as `0.80.6-mathieu.3`. Never force-push `mathieu`.
+   a permanent tag such as `0.80.6-mathieu.4`. Never force-push `mathieu`.
 10. Report the upstream release, meaningful changes, extension audit result,
    validation result, resulting fork commits, and release tag.
 

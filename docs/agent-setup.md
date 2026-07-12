@@ -33,8 +33,8 @@ npm run check
 # Run the build and interactive smoke tests below.
 git switch mathieu
 git merge --ff-only mathieu-update-0.80.6
-git tag 0.80.6-mathieu.3
-git push origin mathieu 0.80.6-mathieu.3
+git tag 0.80.6-mathieu.4
+git push origin mathieu 0.80.6-mathieu.4
 ```
 
 Before synchronizing, inspect the worktree and the commits unique to `mathieu`.
@@ -301,4 +301,5 @@ A running record of why the setup looks the way it does.
 | 2026-07-11 | Audited and pinned `pi-landstrip@0.16.29` with `@landstrip/landstrip@0.16.23`. | Published extension source matches GitHub tag 0.16.29; no malware indicators or lifecycle scripts found. Linux x64 binary SHA-256: `6bf62e09e14537f56218ce97a8b865ed74212e9645b972f66f0967b42ffa18f2`. Accepted caveat: approvals can widen to a displayed directory scope. |
 | 2026-07-11 | Removed Landstrip from `0.80.6-mathieu.1`. | Its stale Pi `^0.74.2` peer range installs a duplicate old Pi package with known advisories. A security control with unresolved packaging and fail-open concerns is not suitable for the curated baseline. |
 | 2026-07-11 | Audited and added `@hypabolic/pi-hypa@0.1.10`. | The extension has an unrestricted Pi peer, zero reported npm advisories, no network telemetry in its TypeScript wrapper, and a local native CLI. Its release workflow stamps package and CLI versions after checkout, so the npm artifact is not byte-identical to tag `v0.1.10`; the generated delta was reviewed. Linux x64 binary SHA-256: `d4517903f584bd27efce6b18dd556d12a6481172541b389cf8b79e74f765a899`. Hypa also installs a private TUI `0.79.10` because of its narrow `^0.79.8` dependency; compatibility is covered by the fork smoke test. |
+| 2026-07-11 | Added curated package metadata in `0.80.6-mathieu.4`. | Pi now identifies the built-in extension as `@hypabolic/pi-hypa` instead of the unhelpful internal directory name `extensions`. |
 | 2026-06-28 | Deferred OneCLI credential isolation. | Worth it only for unattended loops, and it conflicts with landstrip over the proxy env var. Revisit when running pi unattended; chosen design would be OneCLI-owns-network plus landstrip-owns-filesystem. |

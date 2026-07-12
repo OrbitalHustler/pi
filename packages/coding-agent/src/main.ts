@@ -42,7 +42,7 @@ import { assertValidSessionId, SessionManager } from "./core/session-manager.ts"
 import { SettingsManager } from "./core/settings-manager.ts";
 import { printTimings, resetTimings, time } from "./core/timings.ts";
 import { hasTrustRequiringProjectResources, ProjectTrustStore } from "./core/trust-manager.ts";
-import { MATHIEU_EXTENSION_PATHS } from "./mathieu-extensions.ts";
+import { MATHIEU_EXTENSION_METADATA, MATHIEU_EXTENSION_PATHS } from "./mathieu-extensions.ts";
 import { runMigrations, showDeprecationWarnings } from "./migrations.ts";
 import { InteractiveMode, runPrintMode, runRpcMode } from "./modes/index.ts";
 import { initTheme, stopThemeWatcher } from "./modes/interactive/theme/theme.ts";
@@ -666,6 +666,7 @@ export async function main(args: string[], options?: MainOptions) {
 				additionalExtensionPaths: parsed.noExtensions
 					? resolvedExtensionPaths
 					: [...MATHIEU_EXTENSION_PATHS, ...(resolvedExtensionPaths ?? [])],
+				additionalExtensionMetadata: parsed.noExtensions ? undefined : MATHIEU_EXTENSION_METADATA,
 				additionalSkillPaths: resolvedSkillPaths,
 				additionalPromptTemplatePaths: resolvedPromptTemplatePaths,
 				additionalThemePaths: resolvedThemePaths,

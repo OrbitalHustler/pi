@@ -125,6 +125,7 @@ export interface DefaultResourceLoaderOptions {
 	settingsManager?: SettingsManager;
 	eventBus?: EventBus;
 	additionalExtensionPaths?: string[];
+	additionalExtensionMetadata?: ReadonlyMap<string, PathMetadata>;
 	additionalSkillPaths?: string[];
 	additionalPromptTemplatePaths?: string[];
 	additionalThemePaths?: string[];
@@ -163,6 +164,7 @@ export class DefaultResourceLoader implements ResourceLoader {
 	private eventBus: EventBus;
 	private packageManager: DefaultPackageManager;
 	private additionalExtensionPaths: string[];
+	private additionalExtensionMetadata: ReadonlyMap<string, PathMetadata>;
 	private additionalSkillPaths: string[];
 	private additionalPromptTemplatePaths: string[];
 	private additionalThemePaths: string[];
@@ -222,6 +224,7 @@ export class DefaultResourceLoader implements ResourceLoader {
 			settingsManager: this.settingsManager,
 		});
 		this.additionalExtensionPaths = options.additionalExtensionPaths ?? [];
+		this.additionalExtensionMetadata = options.additionalExtensionMetadata ?? new Map();
 		this.additionalSkillPaths = options.additionalSkillPaths ?? [];
 		this.additionalPromptTemplatePaths = options.additionalPromptTemplatePaths ?? [];
 		this.additionalThemePaths = options.additionalThemePaths ?? [];
@@ -385,6 +388,16 @@ export class DefaultResourceLoader implements ResourceLoader {
 			if (!metadataByPath.has(r.path)) {
 				metadataByPath.set(r.path, { source: "cli", scope: "temporary", origin: "top-level" });
 			}
+		}
+		for (const [path, metadata] of this.additionalExtensionMetadata) {
+			const packageRoot = resolve(path);
+			for (const resourcePath of metadataByPath.keys()) {
+				const resolvedResourcePath = resolve(resourcePath);
+				if (resolvedResourcePath === packageRoot || resolvedResourcePath.startsWith(`${packageRoot}${sep}`)) {
+					metadataByPath.set(resourcePath, metadata);
+				}
+			}
+			metadataByPath.set(packageRoot, metadata);
 		}
 		for (const r of cliExtensionPaths.skills) {
 			if (!metadataByPath.has(r.path)) {
