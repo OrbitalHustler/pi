@@ -31,14 +31,14 @@ Use this workflow unless the user requests a different history strategy:
 8. Run `npm run check` with full output plus the documented build and interactive
    smoke tests. Do not advance `mathieu` while any compatibility check fails.
 9. Fast-forward `mathieu` to the tested update branch, push normally, and create
-   a permanent tag such as `0.80.6-mathieu.1`. Never force-push `mathieu`.
+   a permanent tag such as `0.80.6-mathieu.2`. Never force-push `mathieu`.
 10. Report the upstream release, meaningful changes, extension audit result,
    validation result, resulting fork commits, and release tag.
 
-Use `npm run build:mathieu` for release and fresh-host builds. It compiles the
-checked-in model catalogs. Do not use upstream's live catalog-refreshing build
-for a reproducible fork tag unless the catalog changes are intentional and
-reviewed.
+Use `mise exec -- npm run setup:mathieu` for fresh-host installation. It installs
+the tag's locked dependencies with lifecycle scripts disabled, refreshes the
+live model catalogs, builds the fork, and links it globally. Release tags pin
+code and dependencies, but intentionally do not pin the resulting model catalog.
 
 Generated model catalogs and lockfiles can change substantially upstream. Do not
 preserve stale generated output merely because it is locally modified. Determine

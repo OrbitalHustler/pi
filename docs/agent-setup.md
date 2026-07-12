@@ -33,8 +33,8 @@ npm run check
 # Run the build and interactive smoke tests below.
 git switch mathieu
 git merge --ff-only mathieu-update-0.80.6
-git tag 0.80.6-mathieu.1
-git push origin mathieu 0.80.6-mathieu.1
+git tag 0.80.6-mathieu.2
+git push origin mathieu 0.80.6-mathieu.2
 ```
 
 Before synchronizing, inspect the worktree and the commits unique to `mathieu`.
@@ -73,7 +73,7 @@ sudo pacman -S --needed git mise
 mise install
 ```
 
-No additional host packages are required for `0.80.6-mathieu.1`. If a future
+No additional host packages are required for `0.80.6-mathieu.2`. If a future
 release adds OS-level enforcement, document its CachyOS packages and a concrete
 verification command here. Add separate subsections for other operating systems
 rather than assuming the CachyOS result transfers.
@@ -102,13 +102,13 @@ Use this for real work in other projects. It links our fork as a global `pi` so
 the command works anywhere, using the system Node.
 
 ```bash
-npm run build:mathieu                        # reproducible build from tagged source
+npm run build                                # build with latest model catalogs
 npm link --workspace=packages/coding-agent   # symlink our build as global `pi`
 pi --version                                 # now runs from any directory
 ```
 
-After editing Pi's source later, run `npm run build:mathieu` again to refresh the
-global command. The system Node only needs to satisfy
+After editing Pi's source later, run `npm run build` again to refresh the global
+command and model catalogs. The system Node only needs to satisfy
 `engines.node >= 22.19.0`, so mise is not involved here.
 
 > [!NOTE]
@@ -126,9 +126,7 @@ git clone git@github.com:OrbitalHustler/pi.git ~/workspace/pi-agent
 cd ~/workspace/pi-agent
 git switch mathieu
 mise install
-mise exec -- npm ci --ignore-scripts
-mise exec -- npm run build:mathieu
-mise exec -- npm link --workspace=packages/coding-agent
+mise exec -- npm run setup:mathieu
 readlink -f "$(command -v pi)"
 pi --version
 ```
@@ -138,17 +136,20 @@ The resolved command must point into
 no curated third-party extensions. Credentials, sessions, trust decisions, and
 optional user configuration remain under `~/.pi/agent`.
 
-After pulling or merging new fork code, rerun only:
+After pulling or merging new fork code, rerun:
 
 ```bash
-mise exec -- npm ci --ignore-scripts   # when package metadata changed
-mise exec -- npm run build:mathieu
+mise exec -- npm run setup:mathieu
 ```
 
-`build:mathieu` compiles the model catalogs committed in the tagged source. The
-upstream `npm run build` command refreshes catalogs from live services and is
-therefore not reproducible across time; use it only when intentionally updating
-and reviewing model metadata for a new fork release.
+`setup:mathieu` installs the tag's exact lockfile with lifecycle scripts
+disabled, refreshes model catalogs from live provider metadata, builds the fork,
+restores the tracked catalog sources, and links the compiled output as the global
+`pi`. It requires a clean worktree so that restoration cannot discard unrelated
+work. Release tags therefore reproduce Pi code and dependency versions, but
+intentionally do not reproduce model catalogs: two builds of the same tag at
+different times can expose different current models, prices, or limits. A
+catalog service outage can also block the build.
 
 ### Where extensions live
 
@@ -161,7 +162,7 @@ the other.
 | Global user | `~/.pi/agent/` | every Pi installation using that agent directory | Credentials, sessions, and optional personal overrides |
 | Project | `.pi/` | only that repository | Repo-specific or team-shared resources |
 
-No third-party extension is built into `0.80.6-mathieu.1`. Any future curated
+No third-party extension is built into `0.80.6-mathieu.2`. Any future curated
 set must be designed, audited, pinned, and tested as part of a later tagged fork
 release. Project and global resources still work normally.
 
@@ -173,7 +174,7 @@ extensions placed in `~/.pi/agent/extensions/` (global) or `.pi/extensions/`
 
 | Extension | Source | Version | Why we added it |
 |-----------|--------|---------|-----------------|
-| _none_ | — | — | `0.80.6-mathieu.1` intentionally ships without third-party extensions. |
+| _none_ | — | — | `0.80.6-mathieu.2` intentionally ships without third-party extensions. |
 
 Landstrip was removed after audit; see the evaluation and decision log below.
 
