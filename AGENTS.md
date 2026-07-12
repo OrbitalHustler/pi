@@ -1,5 +1,8 @@
 # Development Rules
 
+Before working in this fork, read and follow `MY-AGENTS.md`. Its fork-specific
+rules supplement this upstream file; if they conflict, ask the user.
+
 ## Conversational Style
 
 - Keep answers short and concise
