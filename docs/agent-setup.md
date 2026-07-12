@@ -33,8 +33,8 @@ npm run check
 # Run the build and interactive smoke tests below.
 git switch mathieu
 git merge --ff-only mathieu-update-0.80.6
-git tag 0.80.6-mathieu.4
-git push origin mathieu 0.80.6-mathieu.4
+git tag 0.80.6-mathieu.5
+git push origin mathieu 0.80.6-mathieu.5
 ```
 
 Before synchronizing, inspect the worktree and the commits unique to `mathieu`.
@@ -78,6 +78,13 @@ binary through its pinned npm dependency. If a future
 release adds OS-level enforcement, document its CachyOS packages and a concrete
 verification command here. Add separate subsections for other operating systems
 rather than assuming the CachyOS result transfers.
+
+Web Access works without additional host packages. Install these optional tools
+to enable video frame extraction and YouTube stream discovery:
+
+```bash
+sudo pacman -S --needed ffmpeg yt-dlp
+```
 
 ## Running pi
 
@@ -164,9 +171,9 @@ the other.
 | Global user | `~/.pi/agent/` | every Pi installation using that agent directory | Credentials, sessions, and optional personal overrides |
 | Project | `.pi/` | only that repository | Repo-specific or team-shared resources |
 
-Hypa is built into the fork and loads independently of user or project settings.
-Run `pi -ne` to disable it and all discovered extensions for recovery. Project
-and global resources still work normally.
+Hypa and Web Access are built into the fork and load independently of user or
+project settings. Run `pi -ne` to disable them and all discovered extensions for
+recovery. Project and global resources still work normally.
 
 ## Installed extensions
 
@@ -177,6 +184,7 @@ extensions placed in `~/.pi/agent/extensions/` (global) or `.pi/extensions/`
 | Extension | Source | Version | Why we added it |
 |-----------|--------|---------|-----------------|
 | Hypa | [`@hypabolic/pi-hypa`](https://github.com/Hypabolic/Hypa/tree/v0.1.10/packages/pi-hypa) | `0.1.10` | Compresses noisy local tool output before it reaches the model context. |
+| Web Access | [`pi-web-access`](https://github.com/nicobailon/pi-web-access/tree/v0.13.0) | `0.13.0` | Adds web search, URL and PDF extraction, repository cloning, and optional video analysis. |
 
 Landstrip was removed after audit; see the evaluation and decision log below.
 
@@ -302,4 +310,5 @@ A running record of why the setup looks the way it does.
 | 2026-07-11 | Removed Landstrip from `0.80.6-mathieu.1`. | Its stale Pi `^0.74.2` peer range installs a duplicate old Pi package with known advisories. A security control with unresolved packaging and fail-open concerns is not suitable for the curated baseline. |
 | 2026-07-11 | Audited and added `@hypabolic/pi-hypa@0.1.10`. | The extension has an unrestricted Pi peer, zero reported npm advisories, no network telemetry in its TypeScript wrapper, and a local native CLI. Its release workflow stamps package and CLI versions after checkout, so the npm artifact is not byte-identical to tag `v0.1.10`; the generated delta was reviewed. Linux x64 binary SHA-256: `d4517903f584bd27efce6b18dd556d12a6481172541b389cf8b79e74f765a899`. Hypa also installs a private TUI `0.79.10` because of its narrow `^0.79.8` dependency; compatibility is covered by the fork smoke test. |
 | 2026-07-11 | Added curated package metadata in `0.80.6-mathieu.4`. | Pi now identifies the built-in extension as `@hypabolic/pi-hypa` instead of the unhelpful internal directory name `extensions`. |
+| 2026-07-12 | Audited and added hardened `pi-web-access@0.13.0`. | The npm artifact matches Git tag `v0.13.0`, declares unrestricted Pi peers, has no lifecycle scripts, and produced no npm advisories. Browser-cookie extraction remains opt-in, and URL fetching includes private-address and redirect checks. The upstream curator loaded executable Markdown code from jsDelivr without integrity protection and allowed remote Markdown images. Every fork build now verifies the reviewed curator SHA-256 `ba2f190acc088e4ccb5337870e4dde43172945bba1d3c4cc25204935f701d71d`, embeds pinned `marked@18.0.5` from its verified browser bundle, removes remote fonts and images, and refuses unknown source or renderer hashes. |
 | 2026-06-28 | Deferred OneCLI credential isolation. | Worth it only for unattended loops, and it conflicts with landstrip over the proxy env var. Revisit when running pi unattended; chosen design would be OneCLI-owns-network plus landstrip-owns-filesystem. |
